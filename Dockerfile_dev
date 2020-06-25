@@ -2,18 +2,18 @@ FROM golang:1.13.5
 ENV GOPATH /go
 ENV PATH $PATH:$GOPATH/bin
 
-RUN mkdir -p /go/src/github.com/0907Sowiriro/MyApp
-COPY . /go/src/github.com/0907Sowiriro/MyApp
-WORKDIR /go/src/github.com/0907Sowiriro/MyApp
-ENV PATH $PATH:/go/src/github.com/0907Sowiriro/MyApp
+RUN mkdir -p /go/src/github.com/0907Sowiriro/Libra
+COPY . /go/src/github.com/0907Sowiriro/Libra
+WORKDIR /go/src/github.com/0907Sowiriro/Libra
+ENV PATH $PATH:/go/src/github.com/0907Sowiriro/Libra
 ENV GO111MODULE=on
-ENV APP_MODE=development
 
+RUN go mod init
 RUN go mod tidy
 RUN go get -v github.com/rubenv/sql-migrate/...
 RUN go get github.com/pilu/fresh
 
 EXPOSE 8000
-# CMD ["go", "run", "main.go"]
+CMD ["go", "run", "main.go", "movie.go"]
 # CMD ["realize", "start", "--run"]
-CMD ["fresh"]
+# CMD ["fresh"]

@@ -3,48 +3,61 @@ package main
 import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
+	"log"
+	"net/http"
 )
 
 func dbConn() (db *sql.DB, err error) {
+	log.Printf("hozirihoziri")
 	dbDriver := "mysql"
-	dbUser := "root"
-	dbPass := "root"
-	dbName := "goblog"
+	dbUser := "sowiriro"
+	dbPass := "password"
+	dbName := "sowiriroapp"
 	db, err = sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
 	if err != nil {
 		return db, err
 	}
 	return db, err
 }
-//
-//func Index(w http.ResponseWriter, r *http.Request) {
+
+//func index(w http.ResponseWriter, r *http.Request) {
 //	fmt.Fprintf(w, "indexを表示したしん")
 //	return
 //}
-//
-//func Show(w http.ResponseWriter, r *http.Request) {
+
+//func show(w http.ResponseWriter, r *http.Request) {
 //	fmt.Fprintf(w, "movie showを表示したしん")
 //	return
 //}
-//
-//func (movie *movie)Create(w http.ResponseWriter, r *http.Request) {
-//	db := dbConn()
-//	statement := "INSERT INTO movies (id, title, description) VALUES($1, $2, $3)"
-//	stmt, err := db.Prepare(statement)
-//	if err != nil {
-//		return
-//	}
-//	defer stmt.Close()
-//	err = stmt.QueryRow(movie.title, movie.description).Scan(&movie.Id)
-//	return
-//}
-//
-//func Update(w http.ResponseWriter, r *http.Request) {
+
+func create(w http.ResponseWriter, r *http.Request)  {
+	log.Printf("createの最初がみられた")
+	db, err := dbConn()
+	log.Printf("dbがひらけた！")
+	if err != nil {
+		return
+	}
+	if r.Method == "POST" {
+		title := r.FormValue("title")
+		description := r.FormValue("description")
+		statement, err := db.Prepare("INSERT INTO movies (id, title, description) VALUES($1, $2, $3)")
+		if err != nil {
+			panic(err.Error())
+		}
+		statement.Exec(title, description)
+		log.Println("INSERT: Title: " + title + " | Description: " + description)
+	}
+	defer db.Close()
+	http.Redirect(w, r, "/", 301)
+	return
+}
+
+//func update(w http.ResponseWriter, r *http.Request) {
 //	fmt.Fprintf(w, "movie updateを表示したしん")
 //	return
 //}
-//
-//func Delete(w http.ResponseWriter, r *http.Request) {
+
+//func delete(w http.ResponseWriter, r *http.Request) {
 //	fmt.Fprintf(w, "movie deleteを表示したしん")
 //	return
 //}

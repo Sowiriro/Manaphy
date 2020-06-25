@@ -1,20 +1,13 @@
 package main
 
 import (
-	"fmt"
-	_ "net/http"
+	"log"
+	"net/http"
 )
 
 func main() {
 
-	_, err := dbConn()
-	fmt.Print(err)
-	return
-
-	//mux := http.NewServeMux()
-	//files := http.FileServer(http.Dir("/public"))
-	//mux.Handle("/static", http.StripPrefix("/static/", files))
-	//
+	mux := http.NewServeMux()
 	//mux.HandleFunc("/", Index)
 	//mux.HandleFunc("/err", err)
 	//
@@ -24,10 +17,11 @@ func main() {
 	//mux.HandleFunc("/signup_account", signUpAccount)
 	//mux.HandleFunc("/authenticate", authenticate)
 	//
-	//mux.HandleFunc("/movie/:id", Show)
-	//mux.HandleFunc("/movie/create", Create)
-	//mux.HandleFunc("/movie/:id/update", Update)
-	//mux.HandleFunc("/movie/:id/delete", Delete)
-	//
-	//http.ListenAndServe(":8080", mux)
+	//mux.HandleFunc("/movie/:id", show)
+	log.Printf("hoihoi")
+	mux.HandleFunc("/movie/create", create)
+	//mux.HandleFunc("/movie/:id/update", update)
+	//mux.HandleFunc("/movie/:id/delete", delete)
+	//f
+	http.ListenAndServe(":8000", mux)
 }

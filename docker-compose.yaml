@@ -9,9 +9,9 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - .:/go/src/github.com/0907Sowiriro/MyApp
+      - .:/go/src/github.com/0907Sowiriro/Libra
     environment:
-      DB_USER: root
+      DB_USER: sowiriro
       DB_PASSWORD: password
       DB_PROTOCOL: tcp
       DB_ADDRESS: mysql
@@ -24,7 +24,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      MYSQL_USER: root
+      MYSQL_USER: sowiriro
       MYSQL_ROOT_PASSWORD: password
       MYSQL_PASSWORD: password
       MYSQL_DATABASE: sowiriroapp
