@@ -30,9 +30,11 @@ func main() {
 		Addr:    ":8000",
 		Handler: mux,
 	}
+
 	server.ListenAndServe()
 	err := server.ListenAndServe()
 	if err != nil {
 		log.Print(err)
 	}
+
 }
