@@ -14,6 +14,6 @@ RUN go get -v github.com/rubenv/sql-migrate/...
 RUN go get github.com/pilu/fresh
 
 EXPOSE 8000
-CMD ["go", "run", "main.go", "movie.go"]
+CMD ["go", "run", "main.go", "movie.go", "auth.go", "err.go"]
 # CMD ["realize", "start", "--run"]
 # CMD ["fresh"]
