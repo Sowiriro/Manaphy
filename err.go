@@ -7,5 +7,6 @@ import (
 
 func err(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "エラーが怒ってますだしん")
+	return
 }
 

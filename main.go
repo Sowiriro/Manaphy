@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 )
 
@@ -23,6 +24,7 @@ func main() {
 	mux.HandleFunc("/movie/create", Create)
 	mux.HandleFunc("/movie/:id/update", Update)
 	mux.HandleFunc("/movie/:id/delete", Delete)
+	log.Printf("deleteまでだいじょうぶだった")
 
 	http.ListenAndServe(":8080", mux)
 }
