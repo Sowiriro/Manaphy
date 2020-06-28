@@ -1,33 +1,16 @@
-create table users {
-    id          serial primary key,
-    name           varchar(255),
-    email          varchar(255) not null unique,
-    password       varchar(255) not null,
-    created_at     timestamp not null
-};
 
-create table sessions {
-    id              serial primary key,
-    email           varchar(255),
-    user_id         inter references users(id),
-    created_at      timestamp not null
-};
+CREATE IF NOT EXISTS `users`(
+    id            integer        NOT NULL AUTO_INCREMENT,
+    name          varchar(255)      NOT NULL,
+) ENGINE=InnoDB;
 
-create table movies {
-    id              serial primary key,
-    title           varchar(255),
-    description     text,
-    created_at      timestamp,
-    updated_at      current_timestamp
-};
+CREATE IF NOT EXISTS `movies` (
+    id             integer      NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    title            varchar(255) NOT NULL,
+    description      text         NOT NULL,
+    created_at       timestamp    not null,
+    updated_at       current_timestamp not null,
+) ENGINE=InnoDB;
 
-create table likes {
-    id              serial primary key,
-    user_id         serial not null,
-    movie_id        serial not null,
-};
-
-drop table likes;
-drop table movies;
-drop table sessions;
-drop table users;
+DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `movies`;

@@ -21,11 +21,11 @@ func main() {
 	mux.HandleFunc("/authenticate", authenticate)
 
 	mux.HandleFunc("/movie/:id", show)
-	//mux.HandleFunc("/movie/create", create)
+	mux.HandleFunc("/movie/create", create)
 	mux.HandleFunc("/movie/:id/update", update)
-	log.Printf("updateの後ろまで来た！")
+	log.Printf("updateの後ろまで来たしん")
 	mux.HandleFunc("/movie/:id/delete", delete)
-	log.Printf("delete完了あとはlistenのみ")
+	log.Printf("呼んでるしん")
 
 	http.ListenAndServe(":8000", mux)
 	log.Printf("listen終わったよ")
