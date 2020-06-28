@@ -1,0 +1,5 @@
+development:
+  dialect: mysql
+  datasource: [sowiriro]:[password]@/[sowiriro_app]?parseTime=true
+  dir: db/migrations
+  table: migrations

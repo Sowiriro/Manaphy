@@ -9,9 +9,9 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - .:/go/src/github.com/0907Sowiriro/MyApp
+      - .:/go/src/github.com/0907Sowiriro/Libra
     environment:
-      DB_USER: root
+      DB_USER: sowiriro
       DB_PASSWORD: password
       DB_PROTOCOL: tcp
       DB_ADDRESS: mysql
@@ -24,7 +24,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      MYSQL_USER: root
+      MYSQL_USER: sowiriro
       MYSQL_ROOT_PASSWORD: password
       MYSQL_PASSWORD: password
       MYSQL_DATABASE: sowiriroapp
@@ -34,40 +34,4 @@ services:
       - ./docker_local/db/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./db/initdb.d:/docker-entrypoint-initdb.d
     ports:
-      - 3306:3306version: '3'
-          services:
-            server:
-              build:
-                context: .
-                dockerfile: ./Dockerfile_dev
-              depends_on:
-                - mysql
-              ports:
-                - 8000:8000
-              volumes:
-                - .:/go/src/github.com/0907Sowiriro/MyApp
-              environment:
-                DB_USER: root
-                DB_PASSWORD: password
-                DB_PROTOCOL: tcp
-                DB_ADDRESS: mysql
-                DB_SCHEMA: sowiriroapp
-                DB_MAX_CONNECTIONS: "20"
-                DB_QUERY_TIMEOUT_SECONDS: "15"
-
-            mysql:
-              image: mysql:5.7
-              command: --default-authentication-plugin=mysql_native_password
-              restart: always
-              environment:
-                MYSQL_USER: root
-                MYSQL_ROOT_PASSWORD: password
-                MYSQL_PASSWORD: password
-                MYSQL_DATABASE: sowiriroapp
-                APP_MODE: development
-              volumes:
-                - ./db_data:/var/lib/mysql
-                - ./docker_local/db/my.cnf:/etc/mysql/conf.d/my.cnf
-                - ./db/initdb.d:/docker-entrypoint-initdb.d
-              ports:
-                - 3306:3306
+      - 3306:3306

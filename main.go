@@ -11,7 +11,7 @@ func main() {
 	files := http.FileServer(http.Dir("/public"))
 	mux.Handle("/static", http.StripPrefix("/static/", files))
 
-	mux.HandleFunc("/", Index)
+	mux.HandleFunc("/", index)
 	mux.HandleFunc("/err", err)
 
 	mux.HandleFunc("/login", login)
@@ -20,13 +20,14 @@ func main() {
 	mux.HandleFunc("/signup_account", signUpAccount)
 	mux.HandleFunc("/authenticate", authenticate)
 
-	mux.HandleFunc("/movie/:id", Show)
-	mux.HandleFunc("/movie/create", Create)
-	mux.HandleFunc("/movie/:id/update", Update)
-	mux.HandleFunc("/movie/:id/delete", Delete)
+	mux.HandleFunc("/movie/:id", show)
+	mux.HandleFunc("/movie/create", create)
+	mux.HandleFunc("/movie/:id/update", update)
+	log.Printf("updateの後ろまで来たしん")
+	mux.HandleFunc("/movie/:id/delete", delete)
+	log.Printf("呼んでるしん")
 
 
-	log.Printf("listenまでいけたんじゃない？")
 	http.ListenAndServe(":8000", mux)
-
+	log.Printf("listen終わったよ")
 }
