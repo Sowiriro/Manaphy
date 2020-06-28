@@ -11,8 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3fc0f75b-535d-4736-8b29-6e18677c340e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/db/setup.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db/setup.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movie.go" beforeDir="false" afterPath="$PROJECT_DIR$/movie.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
