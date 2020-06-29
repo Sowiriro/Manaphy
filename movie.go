@@ -2,19 +2,30 @@ package main
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"net/http"
+	"time"
 )
+
+type movie struct {
+	Id          int
+	Title       string
+	Description string
+	CreatedAt   time.Time
+	UpdatedAt   time.Time
+}
+
 
 func dbConn() (Db *sql.DB, err error) {
 	log.Printf("hozirihoziri")
 	dbDriver := "mysql"
-	dbUser := "sowiriro"
-	dbPass := "password"
-	dbName := "sowiriroapp"
-	Db, err = sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
+	//dbUser := "sowiriro"
+	//dbPass := "password"
+	//dbName := "sowiriroapp"
+	Db, err = sql.Open(dbDriver, "root:password@tcp(mysql)/sowiriroapp")
 	if err != nil {
 		fmt.Println(err.Error())
 		return Db, err
@@ -40,21 +51,32 @@ func create(w http.ResponseWriter, r *http.Request)  {
 	}
 	log.Println("dbがひらけたしん！")
 	if r.Method == "POST" {
-		title := r.FormValue("title")
-		log.Println(r.FormValue("title"))
-		description := r.FormValue("description")
-		log.Println(r.FormValue("description"))
-		log.Printf("titleとdescriptionを取ってきたしん")
+		decoder := json.NewDecoder(r.Body)
+		var m movie
+		err := decoder.Decode(&m)
+		if err != nil {
+			panic(err)
+		}
+		defer r.Body.Close()
+		log.Println(m.Title, m.Description)
+		//title := r.FormValue("title")
+		//log.Println(r.FormValue("title"))
+		//description := r.FormValue("description")
+		//log.Println(r.FormValue("description"))
+		//log.Printf("titleとdescriptionを取ってきたしん")
+
 		stmt, err := Db.Prepare("INSERT INTO movies(title, description) VALUES(?, ?)")
 		if err != nil {
 			fmt.Println(err.Error())
 		}
 		log.Printf("statementがでけた！！！")
-		stmt.Exec(title, description)
-		log.Println("INSERT: Title: " + title + " | Description: " + description)
+		if _, err = stmt.Exec(m.Title, m.Description); err != nil {
+			fmt.Println(err.Error())
+		}
+		defer stmt.Close()
+		log.Println("INSERT: Title: " + m.Title + " | Description: " + m.Description)
 	}
 	defer Db.Close()
-	http.Redirect(w, r, "/", 301)
 	return
 }
 

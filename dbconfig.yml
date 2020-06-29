@@ -1,5 +1,4 @@
 development:
   dialect: mysql
-  datasource: [sowiriro]:[password]@/[sowiriro_app]?parseTime=true
-  dir: db/migrations
-  table: migrations
+  dir: .
+  datasource: root:${DB_PASSWORD}@${DB_PROTOCOL}(${DB_ADDRESS})/${DB_SCHEMA}?charset=utf8mb4&collation=utf8mb4_general_ci&parseTime=true
