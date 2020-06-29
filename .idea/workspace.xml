@@ -74,9 +74,12 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+<<<<<<< HEAD
+=======
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+>>>>>>> origin
   </component>
   <component name="WindowStateProjectService">
     <state x="407" y="115" width="465" height="576" key="#Build_Tags_&amp;_Vendoring" timestamp="1592892713679">

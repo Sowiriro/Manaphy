@@ -23,7 +23,6 @@ func main() {
 	mux.HandleFunc("/movie/:id", show)
 	mux.HandleFunc("/movie/create", create)
 	mux.HandleFunc("/movie/:id/update", update)
-	log.Printf("updateの後ろまで来たしん")
 	mux.HandleFunc("/movie/:id/delete", delete)
 	log.Printf("呼んでるしん")
 
