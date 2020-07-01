@@ -58,12 +58,14 @@ func index(w http.ResponseWriter, r *http.Request){
 		movie.CreatedAt = created_at
 		movie.UpdatedAt = updated_at
 		log.Printf("代入成功")
+
+
 		res = append(res, movie)
 		log.Printf("indexを持ってこれたと思う")
 	}
-	response := []Movie{}
+	log.Print(res)
 	defer stmt.Close()
-	response, err = json.Marshal(res)
+	response , err := json.Marshal(res)
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -71,7 +73,6 @@ func index(w http.ResponseWriter, r *http.Request){
 
 	w.Header().Set("Content-Type", "application/json")
 	fmt.Fprint(w, string(response))
-	log.Println(response)
 	log.Printf("errがなかったら取れてるよ！！！")
 	return
 }
@@ -122,7 +123,6 @@ func show(w http.ResponseWriter, r *http.Request) {
 
 		w.Header().Set("Content-Type", "application/json")
 		fmt.Fprint(w, string(response))
-		log.Println(response)
 		log.Printf("errがなかったら取れてるよ！！！")
 	return
 }
