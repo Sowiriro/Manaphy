@@ -20,12 +20,11 @@ func main() {
 	mux.HandleFunc("/signup_account", signUpAccount)
 	mux.HandleFunc("/authenticate", authenticate)
 
-	mux.HandleFunc("/movie/:id", show)
+	mux.HandleFunc("/movie", show)
 	mux.HandleFunc("/movie/create", create)
-	mux.HandleFunc("/movie/:id/update", update)
-	mux.HandleFunc("/movie/:id/delete", delete)
+	mux.HandleFunc("/movie/update", update)
+	mux.HandleFunc("/movie/delete", delete)
 	log.Printf("呼んでるしん")
 
 	http.ListenAndServe(":8000", mux)
-	log.Printf("listen終わったよ")
 }
