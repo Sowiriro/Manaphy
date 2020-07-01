@@ -143,11 +143,6 @@ func create(w http.ResponseWriter, r *http.Request)  {
 		}
 		defer r.Body.Close()
 		log.Println(m.Title, m.Description)
-		//title := r.FormValue("title")
-		//log.Println(r.FormValue("title"))
-		//description := r.FormValue("description")
-		//log.Println(r.FormValue("description"))
-		//log.Printf("titleとdescriptionを取ってきたしん")
 
 		stmt, err := Db.Prepare("INSERT INTO movies(title, description) VALUES(?, ?)")
 		if err != nil {
@@ -157,6 +152,7 @@ func create(w http.ResponseWriter, r *http.Request)  {
 		movie , err := stmt.Exec(m.Title, m.Description); if err != nil {
 			fmt.Println(err.Error())
 		}
+
 
 		response, err := json.Marshal(movie)
 
@@ -170,6 +166,7 @@ func create(w http.ResponseWriter, r *http.Request)  {
 		defer stmt.Close()
 		log.Println("INSERT: Title: " + m.Title + " | Description: " + m.Description)
 	}
+
 	defer Db.Close()
 	return
 }
@@ -183,24 +180,48 @@ func update(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Printf("DBが開けたしん")
 	if r.Method == "POST"{
+		//decoder := json.NewDecoder(r.Body)
+		//var m Movie
+		//err :=  decoder.Decode(&m)
+		//if err != nil {
+		//	return
+		//}
+		//defer r.Body.Close()
+		//log.Println(m.Title, m.Description, m.Id)
 		urlId := r.FormValue("id")
 		title := r.FormValue("title")
 		log.Println(r.FormValue("title"))
 		description := r.FormValue("description")
 		log.Println(r.FormValue("description"))
 		log.Printf("titleとdescriptionを取ってきたしん")
+
 		stmt, err := Db.Prepare("UPDATE movies SET title=?, description=? WHERE id=?")
 		if err != nil {
 			fmt.Println(err.Error())
 		}
+		defer stmt.Close()
 		log.Printf("statementがでけた！！！")
-		if _, err = stmt.Exec(title, description, urlId); err != nil {
+
+		movie, err := stmt.Exec(title, description, urlId); if err != nil {
 			fmt.Println(err.Error())
 		}
-		defer stmt.Close()
-		log.Println("UPDATE: Title: " + title + " | Description: " + description + " | ID: " + urlId)
+
+		log.Println(movie)
+
+		res, err := json.Marshal(movie)
+
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		fmt.Printf(string(res))
+		log.Println("UPDATE: Title: " + title + " | Description: " + description + " | ID: " + urlId )
 	}
+
 	log.Print("updateをすることができた")
+	defer Db.Close()
 	return
 }
 
