@@ -15,7 +15,7 @@ func signUpAccount(w http.ResponseWriter, r *http.Request){
 	return
 }
 
-func signup(w http.ResponseWriter, r *http.Request){
+func signUp(w http.ResponseWriter, r *http.Request){
 	fmt.Fprintf(w, "signupを表示しました")
 	return
 }
