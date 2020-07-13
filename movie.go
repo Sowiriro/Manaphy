@@ -18,6 +18,11 @@ type Movie struct {
 	UpdatedAt   time.Time		`json:"updated_at"`
 }
 
+func responseByJSON(w http.ResponseWriter, data interface{}) {
+	json.NewEncoder(w).Encode(data)
+	return
+}
+
 
 func dbConn() (Db *sql.DB, err error) {
 	log.Printf("DB開き中！！！！！！！")
@@ -33,7 +38,7 @@ func dbConn() (Db *sql.DB, err error) {
 	return Db, err
 }
 
-func index(w http.ResponseWriter, r *http.Request){
+ var index = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	log.Printf("indexをみたしん")
 	Db, err := dbConn()
 	if err != nil {
@@ -74,10 +79,10 @@ func index(w http.ResponseWriter, r *http.Request){
 	w.Header().Set("Content-Type", "application/json")
 	fmt.Fprint(w, string(response))
 	log.Printf("errがなかったら取れてるよ！！！")
-	return
-}
+	responseByJSON(w, res)
+})
 
-func show(w http.ResponseWriter, r *http.Request) {
+var show = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	log.Printf("movie showをみたしん")
 	Db, err := dbConn()
 	if err != nil {
@@ -125,9 +130,9 @@ func show(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprint(w, string(response))
 		log.Printf("errがなかったら取れてるよ！！！")
 	return
-}
+})
 
-func create(w http.ResponseWriter, r *http.Request)  {
+var movieCreate = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request)  {
 	log.Printf("createの最初がみられた")
 	Db, err := dbConn()
 	if err != nil {
@@ -149,10 +154,9 @@ func create(w http.ResponseWriter, r *http.Request)  {
 			fmt.Println(err.Error())
 		}
 		log.Printf("statementがでけた！！！")
-		movie , err := stmt.Exec(m.Title, m.Description); if err != nil {
+		movie, err := stmt.Exec(m.Title, m.Description); if err != nil {
 			fmt.Println(err.Error())
 		}
-
 
 		response, err := json.Marshal(movie)
 
@@ -169,7 +173,7 @@ func create(w http.ResponseWriter, r *http.Request)  {
 
 	defer Db.Close()
 	return
-}
+})
 
 
 func update(w http.ResponseWriter, r *http.Request) {
