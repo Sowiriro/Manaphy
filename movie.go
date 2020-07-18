@@ -38,7 +38,7 @@ func dbConn() (Db *sql.DB, err error) {
 	return Db, err
 }
 
- var index = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+func index(w http.ResponseWriter, r *http.Request) {
 	log.Printf("indexをみたしん")
 	Db, err := dbConn()
 	if err != nil {
@@ -68,6 +68,7 @@ func dbConn() (Db *sql.DB, err error) {
 		res = append(res, movie)
 		log.Printf("indexを持ってこれたと思う")
 	}
+
 	log.Print(res)
 	defer stmt.Close()
 	response , err := json.Marshal(res)
@@ -80,9 +81,9 @@ func dbConn() (Db *sql.DB, err error) {
 	fmt.Fprint(w, string(response))
 	log.Printf("errがなかったら取れてるよ！！！")
 	responseByJSON(w, res)
-})
+}
 
-var show = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+func show (w http.ResponseWriter, r *http.Request) {
 	log.Printf("movie showをみたしん")
 	Db, err := dbConn()
 	if err != nil {
@@ -130,9 +131,9 @@ var show = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprint(w, string(response))
 		log.Printf("errがなかったら取れてるよ！！！")
 	return
-})
+}
 
-var movieCreate = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request)  {
+func create(w http.ResponseWriter, r *http.Request)  {
 	log.Printf("createの最初がみられた")
 	Db, err := dbConn()
 	if err != nil {
@@ -173,7 +174,7 @@ var movieCreate = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) 
 
 	defer Db.Close()
 	return
-})
+}
 
 
 func update(w http.ResponseWriter, r *http.Request) {

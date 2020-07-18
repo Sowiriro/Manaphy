@@ -1,16 +1,19 @@
 package main
 
 import (
+	"crypto/rsa"
 	"crypto/sha256"
 	"database/sql"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	jwtmiddleware "github.com/auth0/go-jwt-middleware"
 	"github.com/dgrijalva/jwt-go"
 	"golang.org/x/crypto/bcrypt"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -28,10 +31,26 @@ type User struct {
 	UpdatedAt	time.Time	`json:"updated_at"`
 }
 
+var (
+	verifyKey *rsa.PublicKey
+	signKey   *rsa.PrivateKey
+)
+
+
 
 type JWT struct {
 	Token string `json:"token"`
 }
+
+var jwtMiddleWare = jwtmiddleware.New(jwtmiddleware.Options{
+ValidationKeyGetter: func(token *jwt.Token)(interface{}, error){
+return []byte(os.Getenv("SIGNINGKEY")), nil  //何をreturnしているのか？引数になぜか(jwtの)tokenそのものを持ってきたが使ってない
+// returnをしているのは、バイト型の配列に環境変数を読み込んで、入れているだけ。
+},
+
+SigningMethod: jwt.SigningMethodHS256,
+})
+
 
 
 func authenticate (w http.ResponseWriter, r *http.Request) {
