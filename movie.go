@@ -133,7 +133,7 @@ func show (w http.ResponseWriter, r *http.Request) {
 	return
 }
 
-func create(w http.ResponseWriter, r *http.Request)  {
+var movieCreate = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request)  {
 	log.Printf("createの最初がみられた")
 	Db, err := dbConn()
 	if err != nil {
@@ -174,7 +174,7 @@ func create(w http.ResponseWriter, r *http.Request)  {
 
 	defer Db.Close()
 	return
-}
+})
 
 
 func update(w http.ResponseWriter, r *http.Request) {

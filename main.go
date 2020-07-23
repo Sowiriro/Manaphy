@@ -24,18 +24,18 @@ func main() {
 	r.Handle("/", http.HandlerFunc(index))
 	r.HandleFunc("/err", err)
 
-	mux.HandleFunc("/login",login)
+	r.HandleFunc("/login",login)
 	r.Handle("/logout", jwtMiddleWare.Handler(http.HandlerFunc(logout)))
-	mux.HandleFunc("/signUp",signUp)
+	r.HandleFunc("/signUp", signUp)
 	r.Handle("/authenticate",jwtMiddleWare.Handler(http.HandlerFunc(authenticate)))
 
 	r.Handle("/movie", jwtMiddleWare.Handler(http.HandlerFunc(show)))
-	mux.HandleFunc("/movie/create", create)
+	r.Handle("/movie/create", jwtMiddleWare.Handler(movieCreate)).Methods("POST")
 	r.Handle("/movie/update", jwtMiddleWare.Handler(http.HandlerFunc(update)))
 	r.Handle("/movie/delete", jwtMiddleWare.Handler(http.HandlerFunc(delete)))
 	log.Printf("呼んでるしん")
 
-	http.ListenAndServe(":8000", mux)
+	http.ListenAndServe(":8000", r)
 }
 
 //func main() {
