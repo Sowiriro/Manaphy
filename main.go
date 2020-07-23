@@ -1,31 +1,52 @@
 package main
 
 import (
+	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 )
 
 func main() {
 
+	r := mux.NewRouter()
+
+
+	//r.Handle("/ping", negroni.New(
+	//	negroni.HandlerFunc(jwtMiddleWare.HandlerWithNext),
+	//	negroni.Wrap(index),
+	//))
+
 	mux := http.NewServeMux()
+
 	files := http.FileServer(http.Dir("/public"))
 	mux.Handle("/static", http.StripPrefix("/static/", files))
 
-	mux.HandleFunc("/", index)
-	mux.HandleFunc("/err", err)
+	r.Handle("/", http.HandlerFunc(index))
+	r.HandleFunc("/err", err)
 
-	mux.HandleFunc("/login", login)
-	mux.HandleFunc("/logout", logout)
-	mux.HandleFunc("/signup", signup)
-	mux.HandleFunc("/signup_account", signUpAccount)
-	mux.HandleFunc("/authenticate", authenticate)
+	mux.HandleFunc("/login",login)
+	r.Handle("/logout", jwtMiddleWare.Handler(http.HandlerFunc(logout)))
+	mux.HandleFunc("/signUp",signUp)
+	r.Handle("/authenticate",jwtMiddleWare.Handler(http.HandlerFunc(authenticate)))
 
-	mux.HandleFunc("/movie/:id", show)
+	r.Handle("/movie", jwtMiddleWare.Handler(http.HandlerFunc(show)))
 	mux.HandleFunc("/movie/create", create)
-	mux.HandleFunc("/movie/:id/update", update)
-	mux.HandleFunc("/movie/:id/delete", delete)
+	r.Handle("/movie/update", jwtMiddleWare.Handler(http.HandlerFunc(update)))
+	r.Handle("/movie/delete", jwtMiddleWare.Handler(http.HandlerFunc(delete)))
 	log.Printf("呼んでるしん")
 
 	http.ListenAndServe(":8000", mux)
-	log.Printf("listen終わったよ")
 }
+
+//func main() {
+//	var array = []int64{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+//	//このarrayから二部探索木をつくって、9をみつける。
+//	num := len(array)
+//	println(num)
+//
+//	search := 9
+//
+//	left := 0
+//
+//	right := num
+//}
