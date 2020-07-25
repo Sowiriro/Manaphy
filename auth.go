@@ -7,13 +7,12 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	jwtmiddleware "github.com/auth0/go-jwt-middleware"
+	"github.com/auth0/go-jwt-middleware"
 	"github.com/dgrijalva/jwt-go"
 	"golang.org/x/crypto/bcrypt"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
 	"time"
 )
 
@@ -44,7 +43,7 @@ type JWT struct {
 
 var jwtMiddleWare = jwtmiddleware.New(jwtmiddleware.Options{
 ValidationKeyGetter: func(token *jwt.Token)(interface{}, error){
-return []byte(os.Getenv("SIGNINGKEY")), nil  //何をreturnしているのか？引数になぜか(jwtの)tokenそのものを持ってきたが使ってない
+return []byte("SIGNINGKEY"), nil  //何をreturnしているのか？引数になぜか(jwtの)tokenそのものを持ってきたが使ってない
 // returnをしているのは、バイト型の配列に環境変数を読み込んで、入れているだけ。
 },
 
@@ -59,7 +58,7 @@ func authenticate (w http.ResponseWriter, r *http.Request) {
 }
 
 
-func signUp(w http.ResponseWriter, r *http.Request){
+func signUp (w http.ResponseWriter, r *http.Request){
 	log.Print("user createの中身が見られた")
 	Db, err := dbConn()
 	if err != nil {
