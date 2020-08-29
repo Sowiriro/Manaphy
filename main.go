@@ -19,6 +19,7 @@ func main() {
 	mux := http.NewServeMux()
 
 	files := http.FileServer(http.Dir("/public"))
+	//ここでroutingをしている　mux.HandleFunc()
 	mux.Handle("/static", http.StripPrefix("/static/", files))
 
 	r.Handle("/", http.HandlerFunc(index))
