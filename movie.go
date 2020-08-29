@@ -4,25 +4,25 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"net/http"
 	"time"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type Movie struct {
-	Id          int		`json:"id"`
-	Title       string		`json:"title"`
-	Description string			`json:"description"`
-	CreatedAt   time.Time		`json:"created_at"`
-	UpdatedAt   time.Time		`json:"updated_at"`
+	Id          int       `json:"id"`
+	Title       string    `json:"title"`
+	Description string    `json:"description"`
+	CreatedAt   time.Time `json:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at"`
 }
 
 func responseByJSON(w http.ResponseWriter, data interface{}) {
 	json.NewEncoder(w).Encode(data)
 	return
 }
-
 
 func dbConn() (Db *sql.DB, err error) {
 	log.Printf("DB開き中！！！！！！！")
@@ -48,7 +48,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 	stmt, err := Db.Query("SELECT * FROM movies ORDER BY id DESC")
 	movie := Movie{}
 	res := []Movie{}
-	for stmt.Next(){
+	for stmt.Next() {
 		var id int
 		var title, description string
 		var created_at, updated_at time.Time
@@ -64,14 +64,13 @@ func index(w http.ResponseWriter, r *http.Request) {
 		movie.UpdatedAt = updated_at
 		log.Printf("代入成功")
 
-
 		res = append(res, movie)
 		log.Printf("indexを持ってこれたと思う")
 	}
 
 	log.Print(res)
 	defer stmt.Close()
-	response , err := json.Marshal(res)
+	response, err := json.Marshal(res)
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -83,24 +82,24 @@ func index(w http.ResponseWriter, r *http.Request) {
 	responseByJSON(w, res)
 }
 
-func show (w http.ResponseWriter, r *http.Request) {
+func show(w http.ResponseWriter, r *http.Request) {
 	log.Printf("movie showをみたしん")
 	Db, err := dbConn()
 	if err != nil {
 		return
 	}
-		urlId := r.FormValue("id")
-		log.Printf("urlIdをとれた")
-		stmt, err := Db.Query("SELECT * FROM movies WHERE id=?", urlId)
-		if err != nil {
-			fmt.Println(err.Error())
-		}
-		log.Print("statementができた！")
+	urlId := r.FormValue("id")
+	log.Printf("urlIdをとれた")
+	stmt, err := Db.Query("SELECT * FROM movies WHERE id=?", urlId)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	log.Print("statementができた！")
 
 	movie := Movie{}
 	res := []Movie{}
 
-	for stmt.Next(){
+	for stmt.Next() {
 		var id int
 		var title, description string
 		var created_at, updated_at time.Time
@@ -119,21 +118,20 @@ func show (w http.ResponseWriter, r *http.Request) {
 		log.Printf("showを持ってこれたと思う")
 	}
 
+	defer stmt.Close()
+	response, err := json.Marshal(res)
 
-		defer stmt.Close()
-		response, err := json.Marshal(res)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-		}
-
-		w.Header().Set("Content-Type", "application/json")
-		fmt.Fprint(w, string(response))
-		log.Printf("errがなかったら取れてるよ！！！")
+	w.Header().Set("Content-Type", "application/json")
+	fmt.Fprint(w, string(response))
+	log.Printf("errがなかったら取れてるよ！！！")
 	return
 }
 
-var movieCreate = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request)  {
+var movieCreate = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	log.Printf("createの最初がみられた")
 	Db, err := dbConn()
 	if err != nil {
@@ -155,13 +153,14 @@ var movieCreate = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) 
 			fmt.Println(err.Error())
 		}
 		log.Printf("statementがでけた！！！")
-		movie, err := stmt.Exec(m.Title, m.Description); if err != nil {
+		movie, err := stmt.Exec(m.Title, m.Description)
+		if err != nil {
 			fmt.Println(err.Error())
 		}
 
 		response, err := json.Marshal(movie)
 
-		if err != nil  {
+		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
@@ -176,15 +175,14 @@ var movieCreate = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) 
 	return
 })
 
-
 func update(w http.ResponseWriter, r *http.Request) {
-	log.Printf( "movie updateをみたしん")
+	log.Printf("movie updateをみたしん")
 	Db, err := dbConn()
 	if err != nil {
 		return
 	}
 	log.Printf("DBが開けたしん")
-	if r.Method == "POST"{
+	if r.Method == "POST" {
 		//decoder := json.NewDecoder(r.Body)
 		//var m Movie
 		//err :=  decoder.Decode(&m)
@@ -207,7 +205,8 @@ func update(w http.ResponseWriter, r *http.Request) {
 		defer stmt.Close()
 		log.Printf("statementがでけた！！！")
 
-		movie, err := stmt.Exec(title, description, urlId); if err != nil {
+		movie, err := stmt.Exec(title, description, urlId)
+		if err != nil {
 			fmt.Println(err.Error())
 		}
 
@@ -222,7 +221,7 @@ func update(w http.ResponseWriter, r *http.Request) {
 
 		w.Header().Set("Content-Type", "application/json")
 		fmt.Printf(string(res))
-		log.Println("UPDATE: Title: " + title + " | Description: " + description + " | ID: " + urlId )
+		log.Println("UPDATE: Title: " + title + " | Description: " + description + " | ID: " + urlId)
 	}
 
 	log.Print("updateをすることができた")
@@ -236,21 +235,21 @@ func delete(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	if r.Method == "POST"{
-	urlId := r.FormValue("id")
-	log.Printf("IDを取ってきたしん")
-	stmt, err := Db.Prepare("DELETE FROM movies WHERE id=?")
-	if err != nil {
-		fmt.Println(err.Error())
+	if r.Method == "POST" {
+		urlId := r.FormValue("id")
+		log.Printf("IDを取ってきたしん")
+		stmt, err := Db.Prepare("DELETE FROM movies WHERE id=?")
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		log.Printf("statementがでけた！！！")
+		if _, err = stmt.Exec(urlId); err != nil {
+			fmt.Println(err.Error())
+		}
+		defer stmt.Close()
+		log.Println("DELETE")
 	}
-	log.Printf("statementがでけた！！！")
-	if _, err = stmt.Exec(urlId); err != nil {
-		fmt.Println(err.Error())
-	}
-	defer stmt.Close()
-	log.Println("DELETE")
-}
- 	log.Print("deleteをすることができた")
+	log.Print("deleteをすることができた")
 
 	return
 }

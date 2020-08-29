@@ -7,27 +7,28 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"github.com/auth0/go-jwt-middleware"
-	"github.com/dgrijalva/jwt-go"
-	"golang.org/x/crypto/bcrypt"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/auth0/go-jwt-middleware"
+	"github.com/dgrijalva/jwt-go"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type JwtCustomClaims struct {
-	UserID      int64
+	UserID int64
 	jwt.StandardClaims
 }
 
 type User struct {
-	Id 			int64 		`json:"id"`
-	Name		string		`json:"name"`
-	Email		string		`json:"email"`
-	Password	string		`json:"password"`
-	CreatedAt	time.Time	`json:"created_at"`
-	UpdatedAt	time.Time	`json:"updated_at"`
+	Id        int64     `json:"id"`
+	Name      string    `json:"name"`
+	Email     string    `json:"email"`
+	Password  string    `json:"password"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 var (
@@ -35,30 +36,25 @@ var (
 	signKey   *rsa.PrivateKey
 )
 
-
-
 type JWT struct {
 	Token string `json:"token"`
 }
 
 var jwtMiddleWare = jwtmiddleware.New(jwtmiddleware.Options{
-ValidationKeyGetter: func(token *jwt.Token)(interface{}, error){
-return []byte("SIGNINGKEY"), nil  //何をreturnしているのか？引数になぜか(jwtの)tokenそのものを持ってきたが使ってない
-// returnをしているのは、バイト型の配列に環境変数を読み込んで、入れているだけ。
-},
+	ValidationKeyGetter: func(token *jwt.Token) (interface{}, error) {
+		return []byte("SIGNINGKEY"), nil //何をreturnしているのか？引数になぜか(jwtの)tokenそのものを持ってきたが使ってない
+		// returnをしているのは、バイト型の配列に環境変数を読み込んで、入れているだけ。
+	},
 
-SigningMethod: jwt.SigningMethodHS256,
+	SigningMethod: jwt.SigningMethodHS256,
 })
 
-
-
-func authenticate (w http.ResponseWriter, r *http.Request) {
+func authenticate(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "ちゃんと承認をしたしん")
 	return
 }
 
-
-func signUp (w http.ResponseWriter, r *http.Request){
+func signUp(w http.ResponseWriter, r *http.Request) {
 	log.Print("user createの中身が見られた")
 	Db, err := dbConn()
 	if err != nil {
@@ -103,14 +99,12 @@ func signUp (w http.ResponseWriter, r *http.Request){
 	return
 }
 
-
-func logout(w http.ResponseWriter, r *http.Request){
+func logout(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "logoutをしただしん")
 	return
 }
 
-
-func login(w http.ResponseWriter, r *http.Request){
+func login(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "ログインをしただしん")
 
 	Db, err := dbConn()
@@ -119,7 +113,7 @@ func login(w http.ResponseWriter, r *http.Request){
 	}
 	log.Println("dbがひらけたしん")
 
-	var u  User
+	var u User
 	//var jwt JWT
 
 	json.NewDecoder(r.Body).Decode(&u)
@@ -128,7 +122,7 @@ func login(w http.ResponseWriter, r *http.Request){
 	//decodeをしてきたpasswordでuserの中身を取ってくる
 	user := Db.QueryRow("SELECT * FROM USERS WHERE email=?", u.Email)
 
-	err = user.Scan(&u.Id,&u.Name, &u.Email, &u.Password)
+	err = user.Scan(&u.Id, &u.Name, &u.Email, &u.Password)
 
 	//ここで該当をするEmailがなかったらエラー
 	if err != nil {
@@ -176,8 +170,6 @@ func login(w http.ResponseWriter, r *http.Request){
 
 	responseByJSON(w, t)
 }
-
-
 
 //func generateToken(claims jwt.Claims)(t, string, err error) {
 //	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
