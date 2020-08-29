@@ -11,11 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3fc0f75b-535d-4736-8b29-6e18677c340e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/auth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/err.go" beforeDir="false" afterPath="$PROJECT_DIR$/err.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movie.go" beforeDir="false" afterPath="$PROJECT_DIR$/movie.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +26,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" path="/usr/local/Cellar/go/1.13.8/libexec" />
+  <component name="GOROOT" path="$USER_HOME$/.anyenv/envs/goenv/versions/1.13.5" />
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -37,6 +34,9 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
   </component>
   <component name="ProjectId" id="1daK5NK9Y0UeXK90UK6sNMELOug" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -54,6 +54,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
+    <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -63,8 +64,9 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -78,14 +80,22 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+  </component>
   <component name="WindowStateProjectService">
-    <state x="371" y="337" key="#GOROOT" timestamp="1592657597385">
-      <screen x="0" y="0" width="1280" height="800" />
+    <state x="417" y="379" key="#GOROOT" timestamp="1598691833448">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="371" y="337" key="#GOROOT/0.0.1280.800@0.0.1280.800" timestamp="1592657597385" />
+    <state x="417" y="379" key="#GOROOT/0.0.1440.900@0.0.1440.900" timestamp="1598691833448" />
     <state x="352" y="209" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1592658790369">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="352" y="209" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.800@0.0.1280.800" timestamp="1592658790369" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1598692228169">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1598692228169" />
   </component>
 </project>
