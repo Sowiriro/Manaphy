@@ -46,6 +46,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
@@ -78,6 +79,7 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+<<<<<<< HEAD
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -88,13 +90,42 @@
     </state>
     <state x="371" y="337" key="#GOROOT/0.0.1280.800@0.0.1280.800" timestamp="1592657597385" />
     <state x="417" y="379" key="#GOROOT/0.0.1440.900@0.0.1440.900" timestamp="1598691833448" />
+=======
+<<<<<<< HEAD
+=======
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+>>>>>>> origin
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="407" y="115" width="465" height="576" key="#Build_Tags_&amp;_Vendoring" timestamp="1592892713679">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="407" y="115" width="465" height="576" key="#Build_Tags_&amp;_Vendoring/0.0.1280.800@0.0.1280.800" timestamp="1592892713679" />
+    <state x="371" y="337" key="#GOROOT" timestamp="1592657597385">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="371" y="337" key="#GOROOT/0.0.1280.800@0.0.1280.800" timestamp="1592657597385" />
+    <state x="274" y="85" key="#Inspections" timestamp="1592987257054">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="274" y="85" key="#Inspections/0.0.1280.800@0.0.1280.800" timestamp="1592987257054" />
+>>>>>>> master
     <state x="352" y="209" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1592658790369">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="352" y="209" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.800@0.0.1280.800" timestamp="1592658790369" />
+<<<<<<< HEAD
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1598692228169">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1598692228169" />
+=======
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup" timestamp="1592987166341">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1592987166341" />
+>>>>>>> master
   </component>
 </project>
