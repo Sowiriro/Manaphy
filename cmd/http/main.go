@@ -33,3 +33,16 @@ func main() {
 
 	e.run(":8080")
 }
+
+//func main() {
+//	var array = []int64{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+//	//このarrayから二部探索木をつくって、9をみつける。
+//	num := len(array)
+//	println(num)
+//
+//	search := 9
+//
+//	left := 0
+//
+//	right := num
+//}
