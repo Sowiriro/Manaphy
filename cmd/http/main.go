@@ -4,10 +4,53 @@ import (
 	"log"
 
 	"github.com/gin-gonic/gin"
+	"database/sql"
+)
+
+var (
+	sqlDB *sql.DB
+	mainCfg *config.Config
+)
+
+var (
+	userHandler handler.User
+)
+var (
+	userUsecase usercase.User
+)
+
+var (
+	userRepository repository.User
 )
 
 func main() {
 
+
+	// initAppmodule()
+	initHandler()
+	initUsecase()
+	initRepository()
+	run()
+}
+
+// func initAppmodule(){
+
+// }
+
+func initRepository(){
+	userRepository data.Repository
+}
+
+func initUsecase(){
+	userUsecase
+}
+
+
+func initHandler(){
+	us
+}
+
+func run(){
 	e := gin.Default()
 
 	//routing for user
@@ -33,6 +76,7 @@ func main() {
 
 	e.run(":8080")
 }
+
 
 //func main() {
 //	var array = []int64{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
