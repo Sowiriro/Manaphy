@@ -2,23 +2,35 @@ package main
 
 import "github.com/gin-gonic/gin"
 
-func NewUserHandler(UserUseCase usecase.UserUseCase) UserHandler {
-	return &userHandler{userUseCase}
+type UserHandlerI interface {
+	Index(c *gin.Context)
+	Show(c *gin.Context)
+	Create(c *gin.Context)
+	Update(c *gin.Context)
+	Delete(c *gin.Context)
 }
 
-func Index(c *gin.Context) {
+type UserHandler struct {
+	userUseCase usecase.UserUseCase
+}
+
+func NewUserHandler(userUseCase usecase.UserUseCase) UserHandler {
+	return &UserHandlerI{userUseCase}
+}
+
+func (h *UserHandler) Index(c *gin.Context) {
 	return
 }
 
-func Show(c *gin.Context) {
+func (h *UserHandler) Show(c *gin.Context) {
 	return
 }
-func Create(c *gin.Context) {
+func (h *UserHandler) Create(c *gin.Context) {
 	return
 }
-func Update(c *gin.Context) {
+func (h *UserHandler) Update(c *gin.Context) {
 	return
 }
-func Delete(c *gin.Context) {
+func (h *UserHandler) Delete(c *gin.Context) {
 	return
 }
