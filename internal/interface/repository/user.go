@@ -1,14 +1,11 @@
 package repository
 
-
-type userRepository sturuct {
-	sqlDB		*sql.DB 
+type userRepository struct {
+	db *sql.DB
 }
 
-func NewUserRepository(db *sql.DB) respository.UserRepository{
-	return &userRepository{
-		db: db,
-	}
+func NewUserRepository(db *sql.DB) repository.UserRepository {
+	return &userRepository{db: db}
 }
 
 func (repo *userRepository) All(entity.Users)(entity.Users, error){
@@ -45,3 +42,4 @@ func (repo *userRepository) Update(entity.User)error {
 func (repo *userRepository) Delete(entity.User)error {
 	return 
 }
+

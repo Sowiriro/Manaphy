@@ -1,12 +1,11 @@
-package main
+package entity
 
-import "time"
-
-type Session struct {
-	Id        int
-	Name      string
-	Email     string
-	Password  string
-	CreatedAt time.Time
-	UpdatedAt time.Time
-}
+type (
+	User struct {
+		ID       int    `json:"id"`
+		Name     string `json:"name"`
+		Email    string `json:"email"`
+		Password string `json:"password"`
+	}
+	Users []User
+)
