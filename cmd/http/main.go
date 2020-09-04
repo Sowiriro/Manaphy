@@ -18,7 +18,6 @@ var (
 var (
 	userUsecase usercase.User
 )
-
 var (
 	userRepository repository.User
 )

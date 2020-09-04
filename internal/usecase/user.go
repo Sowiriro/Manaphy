@@ -1,6 +1,5 @@
 package usecase
 
-
 type UserUseCase struct {
 	userRepo *Repository.UserRepository
 }
@@ -13,26 +12,28 @@ type UserUseCaseI interface {
 	Delete()
 }
 
-func NewUserUsecase(userRepo *Repository.UserRepository) UserUseCase{
-	return &
+func NewUserUsecase(userRepo repository.UserRepository) UserUseCaseI {
+	return &UserUsecase{
+		userRepo,
+	}
 }
 
-func (u *Usecase) All()(){
+func (u *Usecase) All() {
 	return
 }
 
-func (u *Usecase) Get()(){
+func (u *Usecase) Get() {
 	return
 }
 
-func (u *Usecase) Create()(){
+func (u *Usecase) Create() {
 	return
 }
 
-func (u *Usecase) Update()(){
+func (u *Usecase) Update() {
 	return
 }
 
-func (u *Usecase) Delete()(){
+func (u *Usecase) Delete() {
 	return
 }
