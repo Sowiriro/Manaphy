@@ -27,7 +27,7 @@ func (repo *userRepository) All(entity.Users)(entity.Users, error){
 	return entities, nil
 }
 
-func (repo *userRepository) Get(id int)(entity.User, error){
+func (repo *userRepository) GetByID(id int)(entity.User, error){
 	return 
 }
 

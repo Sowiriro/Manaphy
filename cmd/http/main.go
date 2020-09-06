@@ -2,7 +2,13 @@ package main
 
 import (
 	"log"
-
+	data "github.com/Sowiriro/internal/interface/repository"
+	"github.com/Sowiriro/internal/usecase"
+	"github.com/Sowiriro/internal/handler"
+	"github.com/Sowiriro/internal/domain/repository"
+	"github.com/Sowiriro/internal/infrastructure/mysql"
+	"github.com/Sowiriro/internal/pkg/config"
+	"github.com/volatiletech/sqlboiler/boil"
 	"github.com/gin-gonic/gin"
 	"database/sql"
 )
