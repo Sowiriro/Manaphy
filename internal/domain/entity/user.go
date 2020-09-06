@@ -2,6 +2,11 @@ package entity
 
 import(
 	"time"
+	"errors"
+)
+
+var (
+	ErrUserNotFound = errors.New("user is not found")
 )
 
 type (
@@ -19,4 +24,18 @@ type Time struct {
 	CreatedAt time.Time `json:"created_at"
 	UpdatedAt   time.Time `json:"updated_at"`
 	DeletedAt	time.Time `json:"deleted_at"
+}
+
+type UserPostRequest struct {
+	ID string `json:"id"`
+	Name string `json:"name"`
+	Email string `json:"email"`
+	Password string `json:"password"`
+}
+
+type UserPostResponse struct {
+	ID string `json:"id"`
+	Name string `json:"name"`
+	Email string `json:"email"`
+	Password string `json:"password"`
 }

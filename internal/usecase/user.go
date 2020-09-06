@@ -5,7 +5,7 @@ type UserUseCase struct {
 }
 
 type UserUseCaseI interface {
-	All()
+	All(ctx context.Context, input InputPort)(OutputPort, error)
 	Get()
 	Create()
 	Update()
@@ -18,8 +18,21 @@ func NewUserUsecase(userRepo repository.UserRepository) UserUseCaseI {
 	}
 }
 
-func (u *Usecase) All() {
-	return
+func (u *Usecase) All(ctx context.Context, input InputPort)(OutputPort, error) {
+	req, ok := input.(entity.UserPostRequest)
+	if !ok {
+		return nil, entity.ErrFailedCastingInput
+	}
+
+	user, err := u.userRepo.All(ctx, req.Name)
+	if err != nil {
+		return nil, err
+	}
+
+	return entity.UserPostResponse{
+		ID: user.ID,
+		Name: user.Name,
+	},
 }
 
 func (u *Usecase) Get() {

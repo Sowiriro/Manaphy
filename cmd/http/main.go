@@ -8,24 +8,24 @@ import (
 	"github.com/Sowiriro/internal/domain/repository"
 	"github.com/Sowiriro/internal/infrastructure/mysql"
 	"github.com/Sowiriro/internal/pkg/config"
-	"github.com/volatiletech/sqlboiler/boil"
+	"github.com/hinzhu/gorm"
 	"github.com/gin-gonic/gin"
 	"database/sql"
 )
 
 var (
-	sqlDB *sql.DB
+	DB *gorm.DB
 	mainCfg *config.Config
 )
 
 var (
-	userHandler handler.User
+	userHandler handler.UserHandler
 )
 var (
-	userUsecase usercase.User
+	userUseCase usecase.UserUseCase
 )
 var (
-	userRepository repository.User
+	userRepo repository.UserRepository
 )
 
 func main() {
@@ -43,27 +43,27 @@ func main() {
 // }
 
 func initRepository(){
-	userRepository data.Repository
+	userRepo = data.NewUserRepository(DB)
 }
 
 func initUsecase(){
-	userUsecase
+	userUseCase = usecase.NewUserRepository(userRepo)
 }
 
 
 func initHandler(){
-	us
+	userHandler = handler.NewUserHandler(userUseCase)
 }
 
 func run(){
 	e := gin.Default()
 
 	//routing for user
-	e.GET("/user", Index)
-	e.GET("/user/:id", Show)
-	e.POST("/user", Create)
-	e.POST("/user/:id", Update)
-	e.DELETE("/user/:id", Delete)
+	e.GET("/user", userHandler.Index)
+	e.GET("/user/:id", userHandler.Show)
+	e.POST("/user", userHandler.Create)
+	e.POST("/user/:id", userHandler.Update)
+	e.DELETE("/user/:id", userHandlerDelete)
 
 	//routing for movie
 	e.GET("/movie", Index)

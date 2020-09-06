@@ -1,7 +1,7 @@
 package repository
 
 type userRepository struct {
-	db *sql.DB
+	db *gorm.DB
 }
 
 func NewUserRepository(db *sql.DB) repository.UserRepository {

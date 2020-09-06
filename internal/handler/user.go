@@ -1,6 +1,11 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/Sowiriro/internal/usecase"
+	"github.com/Sowiriro/internal/domain/entity"
+	"net/http"
+)
 
 type UserHandlerI interface {
 	Index(c *gin.Context)
@@ -19,7 +24,20 @@ func NewUserHandler(userUseCase usecase.UserUseCase) UserHandler {
 }
 
 func (h *UserHandler) Index(c *gin.Context) {
-	return
+	var req entity.UserPostRequest
+
+	err := c.ShouldBindJSON(&req)
+	if  err != nil {
+		WriteError(ctx, http.StatusBadRequest, err)
+		return
+	}
+
+	response, err := h.userUseCase.All(ctx, req)
+	if err != nil{
+		WriteError(ctx, http.StatusBadRequest, err)
+		return
+	}
+	WriteData(ctx, http.StatusOK,  response)
 }
 
 func (h *UserHandler) Show(c *gin.Context) {
