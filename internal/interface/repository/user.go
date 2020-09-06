@@ -8,7 +8,7 @@ func NewUserRepository(db *sql.DB) repository.UserRepository {
 	return &userRepository{db: db}
 }
 
-func (repo *userRepository) All(entity.Users)(entity.Users, error){
+func (repo *userRepository) All(ctx, context.Context, entity.Users)(entity.Users, error){
 	entities := entity.Users{}
 
 	// users, err := dbmodels.ForumQuestions().All(context.Background(), u.db)
