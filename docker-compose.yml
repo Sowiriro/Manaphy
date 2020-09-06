@@ -9,7 +9,7 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - .:/go/src/github.com/0907Sowiriro/Libra
+      - .:/go/src/github.com/0907Sowiriro/Manaphy
     environment:
       DB_USER: sowiriro
       DB_PASSWORD: password
