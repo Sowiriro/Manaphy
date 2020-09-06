@@ -1,4 +1,4 @@
-module github.com/Sowiriro/Libra
+module github.com/Sowiriro/Maanaphy
 
 go 1.13
 
