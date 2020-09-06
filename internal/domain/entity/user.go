@@ -26,16 +26,22 @@ type Time struct {
 	DeletedAt	time.Time `json:"deleted_at"
 }
 
-type UserPostRequest struct {
+type (
+	UserPostRequest struct {
 	ID string `json:"id"`
 	Name string `json:"name"`
 	Email string `json:"email"`
 	Password string `json:"password"`
+)
+	UserPostRequests []UserPostRequest
 }
 
-type UserPostResponse struct {
+type (
+	UserPostResponse struct {
 	ID string `json:"id"`
 	Name string `json:"name"`
 	Email string `json:"email"`
 	Password string `json:"password"`
+)
+	UserPostResponses []UserPostResponse
 }

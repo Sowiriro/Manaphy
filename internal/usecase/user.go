@@ -29,7 +29,7 @@ func (u *Usecase) All(ctx context.Context, input InputPort)(OutputPort, error) {
 		return nil, err
 	}
 
-	return entity.UserPostResponse{
+	return entity.UserPostResponses{
 		ID: user.ID,
 		Name: user.Name,
 	},
