@@ -1,11 +1,17 @@
 package repository
 
+import(
+	"github.com/hinzhu/gorm"
+	"github.com/Sowiriro/internal/infrastructure"
+	"github.com/Sowiriro/internal/domain"
+)
+
 type userRepository struct {
 	db *gorm.DB
 }
 
-func NewUserRepository(db *sql.DB) repository.UserRepository {
-	return &userRepository{db: db}
+func NewUserRepository(db *gorm.DB) repository.UserRepository {
+	return &userRepository{db: db.DBConnect()}
 }
 
 func (repo *userRepository) All(ctx, context.Context, entity.Users)(entity.Users, error){
