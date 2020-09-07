@@ -52,7 +52,7 @@ func (u *Usecase) Create(ctx context.Context, input InputPort)(OutputPort, error
 	return err
 }
 
-func (u *Usecase) Update() {
+func (u *Usecase) Update(ctx context.Context, input InputPort)(OutputPort, error){
 	entity, err := u.userRepo.GetByUserID(id)
 	if err != nil {
 		return nil
