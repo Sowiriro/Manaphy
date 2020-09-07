@@ -73,7 +73,22 @@ func (h *UserHandler) Create(c *gin.Context) {
 	WriteData(ctx, http.StatusOK, resp)
 }
 func (h *UserHandler) Update(c *gin.Context) {
-	return
+	var req entity.User
+	id := ctx.Param("id")
+	userId, err := strconv.Atoi(id)
+	if err != nil {
+		return
+	}
+
+	err = ctx.ShouldBindJSON(&req)
+	if err != nil {
+		WriteError(ctx, http.StatusBadRequest, err)
+	}
+
+	err = h.userUseCase.Update(req, userId)
+
+	WriteData(ctx, http.StatusOK, err)
+
 }
 func (h *UserHandler) Delete(c *gin.Context) {
 	return
