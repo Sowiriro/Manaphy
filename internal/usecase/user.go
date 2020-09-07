@@ -8,8 +8,8 @@ type UserUseCaseI interface {
 	All(ctx context.Context, input InputPort)(OutputPort, error)
 	GetByID(ctx context.Context, input InputPort)(OutputPort, error)
 	Create(ctx context.Context, input InputPort)(OutputPort, error)
-	Update()
-	Delete()
+	Update(ctx context.Context, input InputPort)(OutputPort, error)
+	Delete(ctx context.Context, input InputPort)(OutputPort, error)
 }
 
 func NewUserUsecase(userRepo repository.UserRepository) UserUseCaseI {
@@ -64,7 +64,7 @@ func (u *Usecase) Update(ctx context.Context, input InputPort)(OutputPort, error
 	}
 	return err
 
-func (u *Usecase) Delete() {
+func (u *Usecase) Delete(ctx context.Context, input InputPort)(OutputPort, error){
 	entity, err := u.userRepo.GetByUserID(id)
 	if err != nil {
 		return nil
