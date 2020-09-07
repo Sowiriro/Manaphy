@@ -44,8 +44,12 @@ func (u *Usecase) GetByID(ctx context.Context,input InputPort)(OutputPort, error
 	return user, err
 }
 
-func (u *Usecase) Create() {
-	return
+func (u *Usecase) Create(ctx context.Context, input InputPort)(OutputPort, error){
+	err := u.userRepo.Create(e)
+	if err != nil {
+		return nil
+	}
+	return err
 }
 
 func (u *Usecase) Update() {
