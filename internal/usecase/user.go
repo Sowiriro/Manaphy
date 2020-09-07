@@ -6,7 +6,7 @@ type UserUseCase struct {
 
 type UserUseCaseI interface {
 	All(ctx context.Context, input InputPort)(OutputPort, error)
-	Get(ctx context.Context, input InputPort)(OutputPort, error)
+	GetByID(ctx context.Context, input InputPort)(OutputPort, error)
 	Create(ctx context.Context, input InputPort)(OutputPort, error)
 	Update()
 	Delete()
@@ -35,8 +35,8 @@ func (u *Usecase) All(ctx context.Context, input InputPort)(OutputPort, error) {
 	},
 }
 
-func (u *Usecase) Get(ctx context.Context,input InputPort)(OutputPort, error){
-	
+func (u *Usecase) GetByID(ctx context.Context,input InputPort)(OutputPort, error){
+
 	user, err := s.userRepo.ByID(id)
 	if err != nil {
 		return nil, nil
