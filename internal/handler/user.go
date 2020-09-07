@@ -41,10 +41,36 @@ func (h *UserHandler) Index(c *gin.Context) {
 }
 
 func (h *UserHandler) Show(c *gin.Context) {
-	return
+	var req entity.User
+	id := ctx.Param("id")
+
+	err := ctx.ShouldBindJSON(&req)
+	if  err != nil {
+		WriteError(ctx, http.StatusOK, err)
+	}
+
+	user, err := h.userUseCase.ByID(id)
+	if err != nil {
+		return
+	}
+
+	WriteData(ctx, http.StatusOK, user)
+}
 }
 func (h *UserHandler) Create(c *gin.Context) {
-	return
+	var req entity.User
+
+	err := ctx.ShouldBindJSON(&req)
+	if err != nil {
+		WriteError(ctx, http.StatusBadRequest, err)
+	}
+
+	resp, err := h.userUseCase.Create(req)
+	if err != nil {
+		return
+	}
+
+	WriteData(ctx, http.StatusOK, resp)
 }
 func (h *UserHandler) Update(c *gin.Context) {
 	return
