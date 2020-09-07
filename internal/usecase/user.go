@@ -53,8 +53,16 @@ func (u *Usecase) Create(ctx context.Context, input InputPort)(OutputPort, error
 }
 
 func (u *Usecase) Update() {
-	return
-}
+	entity, err := u.userRepo.GetByUserID(id)
+	if err != nil {
+		return nil
+	}
+
+	err = u.userRepo.Update(entity)
+	if err != nil {
+		return nil
+	}
+	return err
 
 func (u *Usecase) Delete() {
 	return
