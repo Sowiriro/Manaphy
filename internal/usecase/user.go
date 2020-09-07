@@ -6,8 +6,8 @@ type UserUseCase struct {
 
 type UserUseCaseI interface {
 	All(ctx context.Context, input InputPort)(OutputPort, error)
-	Get()
-	Create()
+	Get(ctx context.Context, input InputPort)(OutputPort, error)
+	Create(ctx context.Context, input InputPort)(OutputPort, error)
 	Update()
 	Delete()
 }
