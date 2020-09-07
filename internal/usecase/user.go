@@ -65,5 +65,12 @@ func (u *Usecase) Update(ctx context.Context, input InputPort)(OutputPort, error
 	return err
 
 func (u *Usecase) Delete() {
-	return
+	entity, err := u.userRepo.GetByUserID(id)
+	if err != nil {
+		return nil
+	}
+
+	err = u.userRepo.Delete(entity)
+
+	return err
 }
