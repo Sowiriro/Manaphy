@@ -35,8 +35,13 @@ func (u *Usecase) All(ctx context.Context, input InputPort)(OutputPort, error) {
 	},
 }
 
-func (u *Usecase) Get() {
-	return
+func (u *Usecase) Get(ctx context.Context,input InputPort)(OutputPort, error){
+	
+	user, err := s.userRepo.ByID(id)
+	if err != nil {
+		return nil, nil
+	}
+	return user, err
 }
 
 func (u *Usecase) Create() {
