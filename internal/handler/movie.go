@@ -4,7 +4,23 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Index(c *gin.Context) {
+type MovieHandlerI interface {
+	Index(c *gin.context)
+	Show(c *gin.context)
+	Create(c *gin.context)
+	Update(c *gin.context)
+	Delete(c *gin.context)
+}
+
+type MovieHandler struct {
+	movieUseCase usecase.MovieUseCase
+}
+
+func NewMovieHandler(usecase usecase.MovieUseCase) MovieHandler {
+	return &MovieHandlerI{movieUseCase}
+}
+
+func ()Index(c *gin.Context) {
 	return
 }
 
