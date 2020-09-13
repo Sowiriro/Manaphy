@@ -5,6 +5,7 @@ type UserUseCase struct {
 }
 
 type UserUseCaseI interface {
+	Execute(ctx context.Context, input InputPort)(OutputPort, error)
 	All(ctx context.Context, input InputPort)(OutputPort, error)
 	GetByID(ctx context.Context, input InputPort)(OutputPort, error)
 	Create(ctx context.Context, input InputPort)(OutputPort, error)
