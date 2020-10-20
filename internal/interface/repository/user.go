@@ -6,14 +6,13 @@ import (
 
 	"github.com/Sowiriro/Manaphy/internal/domain/entity"
 	"github.com/jinzhu/gorm"
-)
 
 type userRepository struct {
 	db *gorm.DB
 }
 
-func NewUserRepository(db *sql.DB) repository.UserRepository {
-	return &userRepository{db: db}
+func NewUserRepository(db *gorm.DB) repository.UserRepository {
+	return &userRepository{db: db.DBConnect()}
 }
 
 func (repo *userRepository) All(ctx, context.Context, entity.Users) (entity.Users, error) {

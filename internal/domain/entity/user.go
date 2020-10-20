@@ -11,7 +11,7 @@ var (
 
 type (
 	User struct {
-		ID       int    `json:"id"`
+		ID       string    `json:"id"`
 		Name     string `json:"name"`
 		Email    string `json:"email"`
 		Password string `json:"password"`
@@ -44,4 +44,24 @@ type (
 	Password string `json:"password"`
 )
 	UserPostResponses []UserPostResponse
+}
+
+func (u *User)NewUser() User {
+	uid, _ := uuid.NewUUID()
+	u.UID = uid.String()
+	reuturn User {
+		UID: uid,
+		Name: u.Name,
+		Email: u.Email,
+		Password: u.Password,
+	}
+}
+
+func (u *User)InitUser() User {
+	return User{
+		UID: u.UID,
+		Name: u.Name,
+		Email: u.Email,
+		Password: u.Password,
+	}
 }
