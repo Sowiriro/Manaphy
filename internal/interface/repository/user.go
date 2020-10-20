@@ -1,5 +1,13 @@
 package repository
 
+import (
+	"context"
+	"database/sql"
+
+	"github.com/Sowiriro/Manaphy/internal/domain/entity"
+	"github.com/jinzhu/gorm"
+)
+
 type userRepository struct {
 	db *gorm.DB
 }
@@ -8,7 +16,7 @@ func NewUserRepository(db *sql.DB) repository.UserRepository {
 	return &userRepository{db: db}
 }
 
-func (repo *userRepository) All(ctx, context.Context, entity.Users)(entity.Users, error){
+func (repo *userRepository) All(ctx, context.Context, entity.Users) (entity.Users, error) {
 	entities := entity.Users{}
 
 	// users, err := dbmodels.ForumQuestions().All(context.Background(), u.db)
@@ -16,9 +24,9 @@ func (repo *userRepository) All(ctx, context.Context, entity.Users)(entity.Users
 	// 	return nil, err
 	// }
 
-	for i := 0; i < len(users); i++ {
-		entity := entity.User {
-			ID:  	users[i].ID,
+	for i := 0; i < len(users); i++ {~
+		entity := entity.User{
+			ID:   users[i].ID,
 			Name: users[i].Name,
 		}
 		entities = append(entities, entity)
@@ -27,19 +35,18 @@ func (repo *userRepository) All(ctx, context.Context, entity.Users)(entity.Users
 	return entities, nil
 }
 
-func (repo *userRepository) GetByID(id int)(entity.User, error){
-	return 
+func (repo *userRepository) GetByID(id int) (entity.User, error) {
+	return
 }
 
-func (repo *userRepository) Create(entity.User)error{
-	return 
+func (repo *userRepository) Create(entity.User) error {
+	return
 }
 
-func (repo *userRepository) Update(entity.User)error {
-	return 
+func (repo *userRepository) Update(entity.User) error {
+	return
 }
 
-func (repo *userRepository) Delete(entity.User)error {
-	return 
+func (repo *userRepository) Delete(entity.User) error {
+	return
 }
-

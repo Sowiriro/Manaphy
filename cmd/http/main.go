@@ -2,19 +2,18 @@ package main
 
 import (
 	"log"
-	data "github.com/Sowiriro/internal/interface/repository"
-	"github.com/Sowiriro/internal/usecase"
-	"github.com/Sowiriro/internal/handler"
-	"github.com/Sowiriro/internal/domain/repository"
-	"github.com/Sowiriro/internal/infrastructure/mysql"
-	"github.com/Sowiriro/internal/pkg/config"
-	"github.com/hinzhu/gorm"
+
+	"github.com/Sowiriro/Manaphy/internal/domain/repository"
+	"github.com/Sowiriro/Manaphy/internal/handler"
+	data "github.com/Sowiriro/Manaphy/internal/interface/repository"
+	"github.com/Sowiriro/Manaphy/internal/pkg/config"
+	"github.com/Sowiriro/Manaphy/internal/usecase"
 	"github.com/gin-gonic/gin"
-	"database/sql"
+	"github.com/hinzhu/gorm"
 )
 
 var (
-	DB *gorm.DB
+	DB      *gorm.DB
 	mainCfg *config.Config
 )
 
@@ -30,7 +29,6 @@ var (
 
 func main() {
 
-
 	// initAppmodule()
 	initHandler()
 	initUsecase()
@@ -42,20 +40,19 @@ func main() {
 
 // }
 
-func initRepository(){
+func initRepository() {
 	userRepo = data.NewUserRepository(DB)
 }
 
-func initUsecase(){
+func initUsecase() {
 	userUseCase = usecase.NewUserRepository(userRepo)
 }
 
-
-func initHandler(){
+func initHandler() {
 	userHandler = handler.NewUserHandler(userUseCase)
 }
 
-func run(){
+func run() {
 	e := gin.Default()
 
 	//routing for user
@@ -81,7 +78,6 @@ func run(){
 
 	e.run(":8080")
 }
-
 
 //func main() {
 //	var array = []int64{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
