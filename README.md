@@ -1,4 +1,4 @@
-<h2>Manaphy <img src="https://user-images.githubusercontent.com/49465310/124341427-3e168380-dbf7-11eb-960b-77cbd22b499c.gif" width="50"> </h2>
+<h1 text-align="center"> Manaphy <img src="https://user-images.githubusercontent.com/49465310/124341427-3e168380-dbf7-11eb-960b-77cbd22b499c.gif" width="50"> </h1>
 
 このレポジトリ（Manaphy）はバックエンドはGolang　フロントエンドはNUXT（VUE）で書かれています
 This repository is written by golang for backend and Nuxt for frontend.
