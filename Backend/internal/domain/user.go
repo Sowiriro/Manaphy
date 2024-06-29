@@ -17,7 +17,7 @@ type (
 		Password string `json:"password"`
 		Time   []Time
 	}
-	Users []User
+	Users []Users
 )
 
 type Time struct {
